@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/screens/place_details.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,10 @@ class PlacesList extends StatelessWidget {
     return ListView.builder(
       itemCount: places.length,
       itemBuilder: (ctx, index) => ListTile(
+        leading: CircleAvatar(
+          radius: 26,
+          backgroundImage: FileImage(places[index].image),
+        ),
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute<Place>(
