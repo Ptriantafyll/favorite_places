@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/screens/place_details.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +42,12 @@ class PlacesList extends StatelessWidget {
         title: Text(
           places[index].title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+        ),
+        subtitle: Text(
+          places[index].location.address,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
         ),

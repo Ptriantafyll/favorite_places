@@ -11,8 +11,12 @@ class PlacesNotifier extends StateNotifier<List<Place>> {
     state = places;
   }
 
-  void addPlace(String title, File image) {
-    final newPlace = Place(title: title, image: image);
+  void addPlace(String title, File image, PlaceLocation location) {
+    final newPlace = Place(
+      title: title,
+      image: image,
+      location: location,
+    );
     state = [newPlace, ...state];
   }
 }
