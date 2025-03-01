@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +18,19 @@ class NewPlaceScreen extends ConsumerStatefulWidget {
 class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _formKey = GlobalKey<FormState>();
   var _enteredPlaceName = '';
+  File? _selectedImage;
 
   void _saveNewPlace() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      ref.read(placesProvider.notifier).addPlace(_enteredPlaceName);
+      if (_selectedImage == null) {
+        return;
+      }
+
+      ref
+          .read(placesProvider.notifier)
+          .addPlace(_enteredPlaceName, _selectedImage!);
 
       Navigator.of(context).pop();
     }
@@ -61,7 +70,11 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              ImageInput(),
+              ImageInput(
+                onSelectImage: (image) {
+                  _selectedImage = image;
+                },
+              ),
               const SizedBox(height: 16),
               Row(
                 children: [
